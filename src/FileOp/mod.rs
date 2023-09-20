@@ -6,8 +6,8 @@ use std::io::BufReader;
 pub struct FileInfo
 { 
     pub path:String, 
-    name:String, 
-    extension:String
+    pub name:String, 
+    pub extension:String
 }
 
 
@@ -45,6 +45,16 @@ impl FileInfo
         buf_reader.read_to_string(& mut content)?;  
         return Ok(content); 
     }
+
+    pub fn change_extension(&mut self,extension:String)
+    {
+        self.extension = extension;
+    } 
+
+    pub fn change_name(&mut self,name:String)
+    {
+        self.name = name;
+    } 
 
 }
 

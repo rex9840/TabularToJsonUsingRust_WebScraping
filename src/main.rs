@@ -1,7 +1,21 @@
+use std::vec;
+
 use scraper::{Html,Selector}; 
 mod FileOp;
 mod Request;
 use json;
+
+
+
+fn json_dump_file(json_obj:json::JsonValue)->std::io::Result<FileOp::FileInfo>
+{
+    let mut file_info = FileOp::FileInfo::default(); 
+    file_info.change_extension(String::from("json"));
+    file_info.change_name(String::from("ShareShansarData"));
+
+    file_info.doc(&json_obj.dump()).expect("Error creating file"); 
+    return Ok(file_info);
+}
 
 fn main()
 { 
@@ -42,11 +56,10 @@ fn main()
             let _ = json_list.push(json_obj.to_owned()); 
             counter = 0;
         }    
-
     }
 
-
-    println!("{0:#?}",json_list[46].dump());
+    println!("{0:#?}",json_list.dump());
+    let _ = json_dump_file(json_list); 
 
 
 }
