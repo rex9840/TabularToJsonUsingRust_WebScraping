@@ -40,7 +40,6 @@ pub fn doc_create(raw_data:&str,file_info:FileInfo)-> std::io::Result<FileOp::Fi
 
 fn doc_raw_data(file:FileOp::FileInfo)->std::io::Result<String>
 {
-    println!("\n\n{0:#?}\n\n",file);
     let data:String =file.return_raw_data()?;
     return Ok(data.to_owned());
 } 
