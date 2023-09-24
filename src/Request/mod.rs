@@ -43,3 +43,13 @@ fn doc_raw_data(file:FileOp::FileInfo)->std::io::Result<String>
     let data:String =file.return_raw_data()?;
     return Ok(data.to_owned());
 } 
+
+pub fn json_dump_file(json_obj:json::JsonValue)->std::io::Result<FileOp::FileInfo>
+{
+    let mut file_info = FileOp::FileInfo::default(); 
+    file_info.change_extension(String::from("json"));
+    file_info.change_name(String::from("Data"));
+
+    file_info.doc(&json_obj.dump()).expect("Error creating file"); 
+    return Ok(file_info);
+}
